@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Dice Rollerr</title>
+</head>
+<body>
+    <div class="container">
+        <form method="post" th:action="@{create}" th:object="${dice_set_creator}">
+            <br/><p class="h2">Tags per dice</p><br/>
+            <div th:each="die : ${dice_set_creator.diceCombination}">
+                <div class="form-group row">
+                    <div class="col-1">
+                        d<span th:text="${die.key}">Die</span>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" th:field="${dice_set_creator.diceCombination[__${die.key}__]}"/><br/>
+                    </div>
+                </div>
+            </div>
+            <ul th:if="${#fields.hasErrors('*')}">
+                <span th:each="err : ${#fields.hasErrors('*')}">Number of tags has to be a number in range of 0 to 10</span>
+            </ul>
+            <button>Next</button>
+        </form>
+    </div>
+</body>
+</html>

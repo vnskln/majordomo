@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Dice Rollerr</title>
+</head>
+<body>
+<div class="container">
+    <form method="post" th:action="@{roll}" th:object="${dice_set}">
+        <br/><h3>Enter details</h3><br/>
+        <div class="form-group row">
+            <div class="col-2">
+                <h4>Type</h4>
+            </div>
+            <div class="col-2">
+                <h4>Tag</h4>
+            </div>
+            <div class="col-2">
+                <h4>Number</h4>
+            </div>
+            <div class="col-2">
+                <h4>Modifier</h4>
+            </div>
+        </div>
+        <div th:each="dice, stat : *{diceList}">
+            <div class="form-group row">
+                <div class="col-2">
+                    <input class="form-control" type="hidden" th:field="*{diceList[__${stat.index}__].sides}"/>
+                    <input class="form-control" type="text" th:value="'d'+${dice.sides}" readonly/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control" type="text" th:placeholder="'Enter tag'" th:field="*{diceList[__${stat.index}__].tag}"/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control" type="text" th:field="*{diceList[__${stat.index}__].number}"/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control" type="text" th:field="*{diceList[__${stat.index}__].modifier}"/>
+                </div>
+            </div>
+        </div>
+        <button>Next</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Dice roller</title>
+</head>
+<body>
+    <div>
+        <h3>Roll results</h3>
+        <div class="col-5">
+            <table class="table text-center">
+                <thead class="thead-dark">
+                    <th scope="col">Dice</th>
+                    <th scope="col">Tag</th>
+                    <th scope="col">Partial results</th>
+                    <th scope="col">Result</th>
+                </thead>
+                <tbody>
+                    <tr scope="row" th:each="dice : ${dice_set.getDiceList()}">
+                        <td class="align-middle"><span th:text="'d' + ${dice.sides}">DICE</span></td>
+                        <td class="align-middle"><span th:text="${dice.tag}">TAG</span></td>
+                        <td class="align-middle">
+                            <table class="table text-center table-bordered">
+                                <tr scope="row" th:each="result : ${dice.getPartialResult()}">
+                                    <td><span th:text="${result}">PARTIAL_RESULT</span></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="align-middle"><span th:text="${dice.result}">RESULT</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
